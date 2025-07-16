@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwur4368j7vyd"]
+
+[ext_resource type="Script" uid="uid://bnkcx3nxsdsuy" path="res://Viewer.cs" id="1_tfsf5"]
+
+[node name="Viewer" type="Node2D"]
+script = ExtResource("1_tfsf5")
