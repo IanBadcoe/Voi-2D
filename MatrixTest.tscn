@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wpm521vk237i"]
+
+[ext_resource type="Script" uid="uid://c0vbubgutwyvi" path="res://MatrixTest.cs" id="1_eamd5"]
+
+[node name="MatrixTest" type="Node2D"]
+script = ExtResource("1_eamd5")
