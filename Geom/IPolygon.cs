@@ -4,5 +4,6 @@ using System.Collections.Generic;
 
 public interface IPolygon
 {
-	public abstract IEnumerable<Vector2> GetVerts(bool closed = false);
+    IEnumerable<Vector2> GetVerts(bool closed = false);
+    IEnumerable<Line> GetLines();
 }

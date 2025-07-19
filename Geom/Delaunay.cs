@@ -6,6 +6,7 @@ using Godot;
 public class Delaunay : IPolySource
 {
     List<Triangle> Triangles = [];
+    Rect2 Bounds;
 
     public Delaunay(IEnumerable<Vector2> points)
     {
@@ -19,24 +20,26 @@ public class Delaunay : IPolySource
         Vector2 max = point_list.Aggregate(
             point_list.First(),
             (x, y) => x.Max(y)
-        );
+        ) + new Vector2(1, 1);
         Vector2 min = point_list.Aggregate(
             point_list.First(),
             (x, y) => x.Min(y)
-        );
+        ) - new Vector2(1, 1);
 
-        Rect2 bounds = new Rect2((min + max) / 2, max - min);
+        // set the bounds a smidge larger than the extents of the point set...
+        Bounds = new Rect2(min, max - min);
 
+        // add two triangles to cover the whole area
         Triangles.Add(new Triangle(
-            min,
-            max,
-            new Vector2(max.X, min.Y)
+            Bounds.Position,
+            Bounds.End,
+            new Vector2(Bounds.End.X, Bounds.Position.Y)
         ));
 
         Triangles.Add(new Triangle(
-            max,
-            min,
-            new Vector2(min.X, max.Y)
+            Bounds.Position,
+            Bounds.End,
+            new Vector2(Bounds.Position.X, Bounds.End.Y)
         ));
     }
 

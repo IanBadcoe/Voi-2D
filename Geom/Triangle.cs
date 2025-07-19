@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Triangle : IPolygon
 {
@@ -8,15 +9,9 @@ public class Triangle : IPolygon
     Vector2 V2;
     Vector2 V3;
 
-    public Triangle()
-    {
-    }
-
     public Triangle(Vector2 v1, Vector2 v2, Vector2 v3)
     {
-        V1 = v1;
-        V2 = v2;
-        V3 = v3;
+        (V1, V2, V3) = PointUtils.SortPointsForWinding(v1, v2, v3);
     }
 
 
@@ -30,5 +25,12 @@ public class Triangle : IPolygon
         {
             yield return V1;
         }
+    }
+
+    public IEnumerable<Line> GetLines()
+    {
+        yield return new Line(V1, V2);
+        yield return new Line(V2, V3);
+        yield return new Line(V3, V1);
     }
 }

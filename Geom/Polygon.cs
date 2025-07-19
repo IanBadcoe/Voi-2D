@@ -19,4 +19,16 @@ public class Polygon : IPolygon
             yield return Verts.First();
         }
     }
+
+    public IEnumerable<Line> GetLines()
+    {
+        Vector2 prev = Verts.Last();
+
+        foreach (var curr in Verts)
+        {
+            yield return new Line(prev, curr);
+
+            prev = curr;
+        }
+    }
 }
