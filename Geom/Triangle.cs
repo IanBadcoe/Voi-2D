@@ -14,7 +14,6 @@ public class Triangle : IPolygon
         (V1, V2, V3) = PointUtils.SortPointsForWinding(v1, v2, v3);
     }
 
-
     public IEnumerable<Vector2> GetVerts(bool closed = false)
     {
         yield return V1;
@@ -32,5 +31,18 @@ public class Triangle : IPolygon
         yield return new Line(V1, V2);
         yield return new Line(V2, V3);
         yield return new Line(V3, V1);
+    }
+
+    public bool Contains(Vector2 p)
+    {
+        foreach (var l in GetLines())
+        {
+            if (!PointUtils.IsInsideLine(l, p))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

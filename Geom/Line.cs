@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using Godot;
 
 public class Line
@@ -12,11 +14,19 @@ public class Line
         End = end;
     }
 
+    public Vector2 Vector
+    {
+        get
+        {
+            return End - Start;
+        }
+    }
+
     public Vector2 Direction
     {
         get
         {
-            return (End - Start).Normalized();
+            return Vector.Normalized();
         }
     }
 
@@ -33,15 +43,30 @@ public class Line
 
     public void DrawOn(Node2D target, Color color, bool show_arrow = false)
     {
-        target.DrawLine(Start, End, color);
+        DrawUtils.DrawLine(target, Start, End, color, show_arrow);
+    }
 
-        if (show_arrow)
+    public Vector2 CommonPoint(Line other)
+    {
+        if (Start == other.Start || Start == other.End)
         {
-            target.DrawColoredPolygon(new Vector2[] {
-                End,
-                End - Direction * 20 + Normal * 10,
-                End - Direction * 20 - Normal * 10
-            }, color);
+            return Start;
         }
+
+        Debug.Assert(End == other.End || End == other.Start);
+
+        return End;
+    }
+
+    public Vector2 OtherPoint(Vector2 point)
+    {
+        if (point == Start)
+        {
+            return End;
+        }
+
+        Debug.Assert(point == End);
+
+        return Start;
     }
 }

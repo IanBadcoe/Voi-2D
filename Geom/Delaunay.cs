@@ -55,4 +55,32 @@ public class Delaunay : IPolySource
     {
         return Triangles.Count;
     }
+
+    public void InsertPoint(Vector2 p)
+    {
+        Triangle found = null;
+
+        foreach (var t in Triangles)
+        {
+            if (t.Contains(p))
+            {
+                found = t;
+                break;
+            }
+        }
+
+        if (found != null)
+        {
+            List<Triangle> ToCheck = [];
+
+            Triangles.Remove(found);
+
+            foreach (var l in found.GetLines())
+            {
+                Triangles.Add(new Triangle(l.Start, l.End, p));
+            }
+
+            // not finished, need to check and apply flips, but gone off on another tangent...
+        }
+    }
 }
