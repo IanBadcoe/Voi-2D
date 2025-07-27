@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="Voi 2D"
-run/main_scene="uid://bwur4368j7vyd"
+run/main_scene="uid://dyrvj54sq3omk"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Voi 2D"
+
+[physics]
+
+2d/physics_engine="Rapier2D"
 
 [rendering]
 

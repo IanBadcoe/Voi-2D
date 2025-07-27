@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyrvj54sq3omk"]
+
+[ext_resource type="Script" uid="uid://oafxbwqv4eva" path="res://PhysApproachTest.cs" id="1_qc8ut"]
+[ext_resource type="Script" uid="uid://d373eexy1o5ou" path="res://Ground.cs" id="2_ywn40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywn40"]
+size = Vector2(500, 100)
+
+[node name="PhysApproachTest" type="Node2D"]
+script = ExtResource("1_qc8ut")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ywn40")
+
+[node name="Collision" type="CollisionShape2D" parent="Ground"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_ywn40")
+
+[node name="Visual" type="Polygon2D" parent="Ground"]
+unique_name_in_owner = true
+antialiased = true
+polygon = PackedVector2Array(-250, -50, 250, -50, 250, 50, -250, 50)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -100)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxtpiimxk0hfw"]
+
+[ext_resource type="Script" uid="uid://cn8mj4vvpndqf" path="res://PGrow/PGBranch.cs" id="1_mcofe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qc8ut"]
+height = 120.0
+
+[node name="Branch" type="RigidBody2D"]
+rotation = 0.0174533
+script = ExtResource("1_mcofe")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -50)
+shape = SubResource("CapsuleShape2D_qc8ut")
+
+[node name="Visual" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -50)
+polygon = PackedVector2Array(0, 60, -10, 50, -10, -50, 0, -60, 10, -50, 10, 50)
